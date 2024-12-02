@@ -17,6 +17,8 @@ function determineWinner({ player, enemy, timerId }) {
   } else if (enemy.health > player.health) {
     document.querySelector("#displayText").innerHTML = "Player 2 Wins";
   }
+  player.canTakeDamage = false;
+  enemy.canTakeDamage = false;
 }
 
 let timer = 120;

@@ -77,6 +77,7 @@ class Fighter extends Sprite {
     this.health = 100;
     this.jumpsMax = 1;
     this.jumps = this.jumpsMax;
+    this.canTakeDamage = true;
 
     this.framesCurrent = 0;
     this.framesElapsed = 0;
@@ -108,7 +109,7 @@ class Fighter extends Sprite {
     this.attackBox.position.y = this.position.y + this.attackBox.offset.y;
     c.fillStyle = "black";
 
-    //draw attack box
+    // draw attack box
     // c.fillRect(
     //   this.attackBox.position.x,
     //   this.attackBox.position.y,

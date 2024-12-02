@@ -215,9 +215,11 @@ function animate() {
       rect2: enemy,
     }) &&
     player.isAttacking &&
-    player.framesCurrent === 4
+    player.framesCurrent === 4 &&
+    player.dead === false &&
+    enemy.canTakeDamage
   ) {
-    enemy.takeHit(7);
+    enemy.takeHit(5);
     player.isAttacking = false;
     gsap.to("#enemyHealth", {
       width: enemy.health + "%",
@@ -234,7 +236,9 @@ function animate() {
       rect2: player,
     }) &&
     enemy.isAttacking &&
-    enemy.framesCurrent === 2
+    enemy.framesCurrent === 2 &&
+    enemy.dead === false &&
+    player.canTakeDamage
   ) {
     enemy.isAttacking = false;
     player.takeHit(5);
@@ -273,7 +277,7 @@ window.addEventListener("keydown", (event) => {
 
         break;
       case "s":
-        player.attack();
+        if (!player.dead) player.attack();
         break;
     }
   }
@@ -295,7 +299,8 @@ window.addEventListener("keydown", (event) => {
         }
         break;
       case "arrowdown":
-        enemy.attack();
+        if (!enemy.dead) enemy.attack();
+
         break;
     }
   }
