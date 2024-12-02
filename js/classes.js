@@ -17,6 +17,7 @@ class Sprite {
     this.framesElapsed = 0;
     this.framesHold = 5;
     this.offset = offset;
+    this.fliped = false;
   }
 
   draw() {
@@ -74,6 +75,8 @@ class Fighter extends Sprite {
     this.height = 150;
     this.lastKey;
     this.health = 100;
+    this.jumpsMax = 1;
+    this.jumps = this.jumpsMax;
 
     this.framesCurrent = 0;
     this.framesElapsed = 0;
@@ -99,6 +102,7 @@ class Fighter extends Sprite {
   }
   update() {
     this.draw();
+
     if (!this.dead) this.animateFrames();
     this.attackBox.position.x = this.position.x + this.attackBox.offset.x;
     this.attackBox.position.y = this.position.y + this.attackBox.offset.y;
@@ -119,10 +123,12 @@ class Fighter extends Sprite {
     if (this.position.y + this.height + this.velocity.y >= canvas.height - 96) {
       this.velocity.y = 0;
       this.position.y = 330;
+      this.jumps = this.jumpsMax;
     } else {
       this.velocity.y += gravity;
     }
   }
+
   takeHit(dmg = 1) {
     this.health -= dmg;
     if (this.health <= 0) {

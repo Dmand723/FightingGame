@@ -217,7 +217,7 @@ function animate() {
     player.isAttacking &&
     player.framesCurrent === 4
   ) {
-    enemy.takeHit(20);
+    enemy.takeHit(7);
     player.isAttacking = false;
     gsap.to("#enemyHealth", {
       width: enemy.health + "%",
@@ -237,7 +237,7 @@ function animate() {
     enemy.framesCurrent === 2
   ) {
     enemy.isAttacking = false;
-    player.takeHit(20);
+    player.takeHit(5);
     gsap.to("#playerHealth", {
       width: player.health + "%",
     });
@@ -266,10 +266,13 @@ window.addEventListener("keydown", (event) => {
         player.lastKey = "a";
         break;
       case "w":
-        player.velocity.y = -20;
+        if (player.jumps > 0) {
+          player.jumps--;
+          player.velocity.y = -20;
+        }
 
         break;
-      case " ":
+      case "s":
         player.attack();
         break;
     }
@@ -286,7 +289,10 @@ window.addEventListener("keydown", (event) => {
         enemy.lastKey = "ArrowLeft";
         break;
       case "arrowup":
-        enemy.velocity.y = -20;
+        if (enemy.jumps > 0) {
+          enemy.jumps--;
+          enemy.velocity.y = -20;
+        }
         break;
       case "arrowdown":
         enemy.attack();

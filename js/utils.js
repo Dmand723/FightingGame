@@ -19,7 +19,7 @@ function determineWinner({ player, enemy, timerId }) {
   }
 }
 
-let timer = 60;
+let timer = 120;
 let timerId;
 function decreseTimer() {
   if (timer > 0) {
